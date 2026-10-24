@@ -11,8 +11,26 @@ into one site:
 Each chapter keeps everything the original apps had — 7 student-oriented
 summary notes, practice sets, hints that arrive one step at a time, full
 step-by-step solutions, and auto-generated **similar questions** when a
-student gets one wrong — plus a shared home page, a combined progress page
-and a chapter switcher in the header.
+student gets one wrong — plus a shared home page, a combined progress page,
+a chapter switcher in the header, and a **tap-to-enter answer pad** so
+students can build an answer by clicking instead of typing.
+
+## Answer pad
+
+`js/keypad.js` floats a keypad above the page whenever an answer field is
+focused. It lives in the shell, so both chapters get it without either app
+knowing about it:
+
+- digits, `.`, brackets, `^`, and `× ÷ − +` — which insert plain `* / - +`,
+  the exact characters both marking engines already accept
+- a row of the letters each chapter actually uses (Fraction chapter adds π)
+- backspace, clear, and a Check button that presses the chapter's own
+  submit button, then scrolls the feedback into view
+- the focused answer box is lifted above the pad so it is never covered;
+  both chapters focus their box before it is attached to the DOM, so the
+  pad does that job for them
+- hide it with ✕ (a floating ⌨ button brings it back); the choice is
+  remembered per device
 
 ## Layout
 
@@ -22,6 +40,7 @@ index.dev.html      multi-file development entry
 styles.css          one design system for both chapters
 js/
   shell.js          shared frame: state, header, routing, landing + progress
+  keypad.js         tap-to-enter answer pad (shared by both chapters)
   topics/
     identity.js     generated — see tools/build_topics.py
     frac.js         generated — see tools/build_topics.py

@@ -277,3 +277,66 @@ progress::-moz-progress-bar { background: var(--acc2); border-radius: 99px; }
 @media (max-width: 780px) {
   .chap-switch { display: none; }
 }
+
+/* ==========================================================================
+   Answer pad (js/keypad.js) — tap-to-enter answer keypad for students
+   ========================================================================== */
+.kp {
+  position: fixed; left: 50%; bottom: 12px; transform: translateX(-50%);
+  z-index: 60; width: min(430px, calc(100vw - 20px));
+  background: var(--card); border: 1px solid var(--line); border-radius: 18px;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, .45); padding: 8px 10px 10px;
+  font-size: 14px; user-select: none; -webkit-user-select: none;
+}
+.kp-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+.kp-title { font-size: 12.5px; font-weight: 700; color: var(--fg2); }
+.kp-title small { font-weight: 500; opacity: .8; }
+.kp-close {
+  background: none; border: 0; color: var(--fg2); cursor: pointer;
+  font-size: 15px; line-height: 1; padding: 4px 6px; border-radius: 8px;
+}
+.kp-close:hover { background: var(--card2); color: var(--fg); }
+
+.kp-vars { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.kp-vars-lab { font-size: 11px; font-weight: 700; color: var(--fg2); text-transform: uppercase; flex: none; }
+.kp-vars-list {
+  display: flex; gap: 6px; overflow-x: auto; padding-bottom: 3px;
+  scrollbar-width: thin; flex: 1;
+}
+.kp-vars-list::-webkit-scrollbar { height: 5px; }
+.kp-vars-list::-webkit-scrollbar-thumb { background: var(--line); border-radius: 99px; }
+
+.kp-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.kp-key {
+  padding: 8px 0; border-radius: 10px; border: 1px solid var(--line);
+  background: var(--card2); color: var(--fg); font-size: 17px; font-weight: 700;
+  font-family: inherit; cursor: pointer; transition: transform .06s, background .12s;
+}
+.kp-key:hover { border-color: var(--acc); }
+.kp-key:active { transform: scale(.94); background: var(--acc); color: #fff; }
+.kp-op { color: var(--acc2); }
+.kp-op:active { background: var(--acc2); color: #04211d; }
+.kp-fn { font-size: 14px; color: var(--fg2); }
+.kp-var { padding: 6px 13px; font-size: 14px; border-radius: 9px; flex: none; }
+
+.kp-check {
+  width: 100%; margin-top: 8px; padding: 9px 0; border: 0; border-radius: 11px;
+  background: var(--acc); color: #fff; font-size: 15px; font-weight: 800;
+  font-family: inherit; cursor: pointer; transition: transform .06s;
+}
+.kp-check:active { transform: scale(.98); }
+
+.kp-fab {
+  position: fixed; right: 14px; bottom: 14px; z-index: 60;
+  width: 48px; height: 48px; border-radius: 50%; border: 1px solid var(--line);
+  background: var(--card); color: var(--fg); font-size: 19px; cursor: pointer;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, .35);
+}
+.kp-hidden { display: none !important; }
+
+/* leave room for the docked pad so it never hides the footer or feedback */
+body.kp-docked { padding-bottom: 300px; }
+
+@media (max-width: 520px) {
+  .kp { bottom: 0; border-radius: 16px 16px 0 0; width: 100vw; left: 0; transform: none; }
+}

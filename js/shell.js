@@ -206,6 +206,10 @@ function mountChapter(id, path) {
   appEl.appendChild(renderFooter());
   topic.mount(host);
   topic.route(path);
+  /* the answer pad: show each chapter's own letters, and put the caret in
+     the first answer box (both chapters focus too early to do it themselves) */
+  if (window.__ML.refreshKeypad) window.__ML.refreshKeypad();
+  if (window.__ML.focusAnswerBox) setTimeout(window.__ML.focusAnswerBox, 60);
 }
 
 function route() {

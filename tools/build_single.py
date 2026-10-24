@@ -68,6 +68,7 @@ def main():
 <script>__SHELL__</script>
 <script>__IDENTITY__</script>
 <script>__FRAC__</script>
+<script>__KEYPAD__</script>
 </body>
 </html>
 """
@@ -77,7 +78,8 @@ def main():
            .replace('__KATEX_JS__', guard(read('vendor/katex/katex.min.js')))
            .replace('__SHELL__', guard(read('js/shell.js')))
            .replace('__IDENTITY__', guard(read('js/topics/identity.js')))
-           .replace('__FRAC__', guard(read('js/topics/frac.js'))))
+           .replace('__FRAC__', guard(read('js/topics/frac.js')))
+           .replace('__KEYPAD__', guard(read('js/keypad.js'))))
 
     dest = os.path.join(ROOT, 'index.html')
     with open(dest, 'w', encoding='utf-8') as f:
